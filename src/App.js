@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 import NavBar from './components/NavBar'
 import './App.css';
 import Body from './containers/Body'
-import { BrowserRouter as Router } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route
+} from "react-router-dom";
+import NewDare from './components/NewDare'
 
 export class App extends Component {
   constructor() {
@@ -26,14 +30,28 @@ export class App extends Component {
     }
   }
 
+  handleNewDare = (e) => {
+    console.log(e)
+  }
+
   render() {
     const { logged_user, dares } = this.state
     return (
-      <div className="App">
-        <NavBar user={logged_user} />
-        <br />
-        <Body dares={dares} onPay={this.handlePayment} />
-      </div>
+      <Router>
+        <div className="App">
+          <NavBar user={logged_user} />
+          <br />
+          <Route exact path="/">
+            <Body dares={dares} onPay={this.handlePayment} />
+          </Route>
+          <Route exact path="/new_dare">
+            <NewDare
+              user={logged_user}
+              onSubmit={this.handleNewDare}
+            />
+          </Route>
+        </div>
+      </Router>
     )
   }
 

@@ -27,7 +27,7 @@ export class DareCard extends Component {
             />
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
+          <small className="text-muted">Posted {Math.round(Math.random() * 200) + 1} mins ago</small>
         </Card.Footer>
       </Card>
     );
