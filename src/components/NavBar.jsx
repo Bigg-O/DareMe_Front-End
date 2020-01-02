@@ -1,22 +1,31 @@
 import React, { Component } from "react";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+import Nav from 'react-bootstrap/Nav'
 
 export class NavBar extends Component {
   render() {
+    const { wallet, username } = this.props.user;
     return (
-      <Navbar bg="primary" variant="dark">
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
-          <Navbar.Collapse className="justify-content-end">
-            <Navbar.Text>
-              Signed in as: <a href="#login">Mark Otto</a>
-            </Navbar.Text>
-          </Navbar.Collapse>
-        </Nav>
+      <Navbar bg="primary" variant="dark" fixed="top">
+        <Navbar.Brand className="title" href="#home">
+          DareMe
+        </Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse className="justify-content-end">
+          <Button variant="primary">
+            Money: <Badge variant="light"> ${wallet}</Badge>
+          </Button>
+          <Navbar.Text>
+            Signed in as: <a href="#login">{username}</a>
+          </Navbar.Text>
+        </Navbar.Collapse>
+        <Nav.Link href="#new_dare">
+          <Button className="dare_button" variant="secondary">
+            Add a Dare!
+          </Button>
+        </Nav.Link>
       </Navbar>
     );
   }
