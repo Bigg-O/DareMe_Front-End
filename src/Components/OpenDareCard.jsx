@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Card from "react-bootstrap/Card";
 import OpenDareCardPay from "./OpenDareCardPay";
+import Card from "react-bootstrap/Card";
 
 export class DareCard extends Component {
   render() {
