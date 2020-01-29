@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import NavBar from './Components/NavBar'
 import './App.css';
-import Body from './Containers/Body'
-import NewDare from './Components/NewDare'
 import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
+import NavBar from './Components/NavBar'
+import Body from './Containers/Body'
+import NewDare from './Components/NewDare'
 
 export class App extends Component {
   constructor() {
@@ -38,19 +38,18 @@ export class App extends Component {
     const { logged_user, dares } = this.state
     return (
       <Router>
-        <div className="App">
-          <NavBar user={logged_user} />
-          <br />
-          <Route exact path="/">
-            <Body dares={dares} onPay={this.handlePayment} />
-          </Route>
-          <Route exact path="/new_dare">
-            <NewDare
-              user={logged_user}
-              onSubmit={this.handleNewDare}
-            />
-          </Route>
-        </div>
+        <NavBar user={logged_user} />
+        <br />
+
+        <Route exact path="/">
+          <Body dares={dares} onPay={this.handlePayment} />
+        </Route>
+        <Route exact path="/new_dare">
+          <NewDare
+            user={logged_user}
+            onSubmit={this.handleNewDare}
+          />
+        </Route>
       </Router>
     )
   }

@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import ButtonGroup from "react-bootstrap/ButtonGroup";
-import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
-import ProgressBar from "react-bootstrap/ProgressBar";
-import Alert from "react-bootstrap/Alert";
+import {
+  ButtonGroup,
+  Button,
+  ButtonToolbar,
+  ToggleButton,
+  ToggleButtonGroup,
+  ProgressBar,
+  Alert
+} from "react-bootstrap";
 
 export class OpenDareCardPay extends Component {
   constructor() {
