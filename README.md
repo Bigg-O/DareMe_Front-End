@@ -12,7 +12,7 @@ You can directly access the app from "https://dashboard.heroku.com/apps"
 
 backend API from "URL"
 
-Frontend repository is available here: https://github.com/Bigg-O/DareMe_backend
+Backend repository is available here: https://github.com/Bigg-O/DareMe_backend
 
 ## Deployment
 
