@@ -1,75 +1,26 @@
-import React, { Component } from 'react'
-import NavBar from './components/NavBar'
+import React from 'react';
+import logo from './logo.svg';
 import './App.css';
-import Body from './containers/Body'
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
-import NewDare from './components/NewDare'
 
-export class App extends Component {
-  constructor() {
-    super()
-    this.state = {
-      logged_user: '',
-      dares: []
-    }
-  }
-
-  handlePayment = (dare_id, amount) => {
-    let dares = [...this.state.dares]
-    let dare = dares.find(dare => dare.id === dare_id)
-    let user = this.state.logged_user
-
-    if (dare.amount + amount <= dare.wanted_profit && amount <= user.wallet) {
-      user.wallet -= amount
-      dare.amount += amount
-      this.setState({ user })
-      this.setState({ dares })
-    }
-  }
-
-  handleNewDare = (e) => {
-  }
-
-  render() {
-    const { logged_user, dares } = this.state
-    return (
-      <Router>
-        <div className="App">
-          <NavBar user={logged_user} />
-          <br />
-          <Route exact path="/">
-            <Body dares={dares} onPay={this.handlePayment} />
-          </Route>
-          <Route exact path="/new_dare">
-            <NewDare
-              user={logged_user}
-              onSubmit={this.handleNewDare}
-            />
-          </Route>
-        </div>
-      </Router>
-    )
-  }
-
-  componentDidMount() {
-    const logged_user = {
-      id: "d1h98hd3190j",
-      username: "Bigg-O",
-      wallet: 100,
-      profile_pic_url: "https://www.fakepersongenerator.com/Face/male/male1084242792541.jpg",
-      about: "Internetaholic. Total creator. Passionate coffee expert. Hipster-friendly travel buff."
-    }
-
-    // fetch("localhost:3000/dares")
-    // .then(resp => resp.json())
-    // .then(dares => this.setState({ dares }))
-
-    this.setState({ logged_user })
-  }
-
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
 }
 
-export default App
+export default App;
