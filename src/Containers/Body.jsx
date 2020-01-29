@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import OpenDareCard from "../components/OpenDareCard";
+import OpenDareCard from "../Components/OpenDareCard";
 import CardColumns from "react-bootstrap/CardColumns";
 
 export class Body extends Component {

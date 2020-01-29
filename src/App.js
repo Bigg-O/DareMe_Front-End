@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import NavBar from './components/NavBar'
+import NavBar from './Components/NavBar'
 import './App.css';
-import Body from './containers/Body'
+import Body from './Containers/Body'
+import NewDare from './Components/NewDare'
 import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom";
-import NewDare from './components/NewDare'
 
 export class App extends Component {
   constructor() {
@@ -31,6 +31,7 @@ export class App extends Component {
   }
 
   handleNewDare = (e) => {
+    console.log(e)
   }
 
   render() {
@@ -62,12 +63,10 @@ export class App extends Component {
       profile_pic_url: "https://www.fakepersongenerator.com/Face/male/male1084242792541.jpg",
       about: "Internetaholic. Total creator. Passionate coffee expert. Hipster-friendly travel buff."
     }
-
-    // fetch("localhost:3000/dares")
-    // .then(resp => resp.json())
-    // .then(dares => this.setState({ dares }))
+    const data = require('./temp_data.json')
 
     this.setState({ logged_user })
+    this.setState({ dares: data.dares })
   }
 
 }

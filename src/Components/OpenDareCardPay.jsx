@@ -5,7 +5,7 @@ import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import Alert from 'react-bootstrap/Alert'
+import Alert from "react-bootstrap/Alert";
 
 export class OpenDareCardPay extends Component {
   constructor() {
@@ -25,13 +25,16 @@ export class OpenDareCardPay extends Component {
     if (wanted_profit === amount) {
       return (
         <div>
-        <ProgressBar striped variant="success" now={100} label={`$${amount}`}/>
-        <br/>
-        <Alert variant="info">
-          DARE IS IN PROGRESS
-        </Alert>
+          <ProgressBar
+            striped
+            variant="success"
+            now={100}
+            label={`$${amount}`}
+          />
+          <br />
+          <Alert variant="info">DARE IS IN PROGRESS</Alert>
         </div>
-      )
+      );
     } else
       return (
         <div>

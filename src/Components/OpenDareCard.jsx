@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import Card from "react-bootstrap/Card";
-import OpenDareCardPay from './OpenDareCardPay'
+import OpenDareCardPay from "./OpenDareCardPay";
 
 export class DareCard extends Component {
-
-
   render() {
     const {
       username,
       open_title,
       open_description,
-      open_pic_url,
+      open_pic_url
     } = this.props.dare;
     return (
       <Card>
@@ -21,13 +19,12 @@ export class DareCard extends Component {
         <Card.Body>
           <Card.Title>{open_title}</Card.Title>
           <Card.Text>{open_description}</Card.Text>
-          <OpenDareCardPay
-            dare={this.props.dare}
-            onPay={this.props.onPay}
-            />
+          <OpenDareCardPay dare={this.props.dare} onPay={this.props.onPay} />
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Posted {Math.round(Math.random() * 200) + 1} mins ago</small>
+          <small className="text-muted">
+            Posted {Math.round(Math.random() * 200) + 1} mins ago
+          </small>
         </Card.Footer>
       </Card>
     );
