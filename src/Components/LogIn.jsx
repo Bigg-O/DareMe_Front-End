@@ -6,8 +6,8 @@ import "./css/LogIn.css";
 export class LogIn extends Component {
   render() {
     return (
-      <Container>
-        <Image src={Logo} fluid />
+      <Container className="login-container">
+        <Image className="login-logo" src={Logo} fluid />
 
         <Form className="loginForm">
           <Form.Group controlId="formUsername">
@@ -20,11 +20,14 @@ export class LogIn extends Component {
             <Form.Control type="password" placeholder="Enter Password" />
           </Form.Group>
 
-          <Button variant="primary">Sign Up</Button>
-          <Button variant="primary" type="submit">
+          <Button className="log-in" variant="primary" type="submit">
             Log In
           </Button>
         </Form>
+
+        <p className="sign-up">
+          Sign up for free! <span className="signup-link">Sign Up</span>
+        </p>
       </Container>
     );
   }
