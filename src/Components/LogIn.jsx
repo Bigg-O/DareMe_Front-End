@@ -5,11 +5,19 @@ import "./css/LogIn.css";
 import { Link } from "react-router-dom";
 
 export class LogIn extends Component {
-
   handleSubmission = e => {
-    e.preventDefault()
-    console.log(e)
-  }
+    e.preventDefault();
+    console.log(e);
+
+    // Make Post request to backend and store JWT key to local storage
+    // fetch(url, {
+    //   username: e.target,
+    //   password: e.target
+    // }).then(result => {
+    //   localStorage.setItem("JWT", result.data);
+    //   this.props.history.push('AuthComp')
+    // });
+  };
 
   render() {
     return (
@@ -19,12 +27,20 @@ export class LogIn extends Component {
         <Form className="loginForm" onSubmit={this.handleSubmission}>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control required type="username" placeholder="Enter Username" />
+            <Form.Control
+              required
+              type="username"
+              placeholder="Enter Username"
+            />
           </Form.Group>
 
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control required type="password" placeholder="Enter Password" />
+            <Form.Control
+              required
+              type="password"
+              placeholder="Enter Password"
+            />
           </Form.Group>
 
           <Button className="log-in" variant="primary" type="submit">

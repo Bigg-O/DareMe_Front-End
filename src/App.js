@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import './App.css';
 import {
   BrowserRouter,
-  Route
+  Route,
+  Switch
 } from "react-router-dom";
 import NavBar from './Components/NavBar'
 import Body from './Containers/Body'
@@ -54,24 +55,24 @@ export class App extends Component {
     const { logged_user, dares } = this.state
     return (
       <BrowserRouter>
-        <Route exact path="/" component={LogIn} />
-        <Route exact path="/signup" component={SignUp} />
+        <Switch>
+          <Route exact path="/">
+
+            <NavBar user={logged_user} />
+            <Body dares={dares} onPay={this.handlePayment} />
+          </Route>
+          <Route exact path="/new_dare">
+            <NavBar user={logged_user} />
+            <NewDare
+              user={logged_user}
+              onSubmit={this.handleNewDare}
+            />
+          </Route>
+
+          <Route exact path="/login" component={LogIn} />
+          <Route exact path="/signup" component={SignUp} />
+        </Switch>
       </BrowserRouter >
-
-      // <Router>
-      //   <NavBar user={logged_user} />
-      //   <br />
-
-      //   <Route exact path="/">
-      //     <Body dares={dares} onPay={this.handlePayment} />
-      //   </Route>
-      // <Route exact path="/new_dare">
-      //   <NewDare
-      //     user={logged_user}
-      //     onSubmit={this.handleNewDare}
-      //   />
-      // </Route>
-      // </Router>
     )
   }
 }

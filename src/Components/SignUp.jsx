@@ -23,7 +23,7 @@ export class SignUp extends Component {
 
         <p className="b2-login">
           Actually I have an account, back to{" "}
-          <Link className="login-link" to="/">
+          <Link className="login-link" to="/login">
             Log-in
           </Link>
         </p>
