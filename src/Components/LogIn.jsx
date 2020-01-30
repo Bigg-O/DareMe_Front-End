@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, Image, Container } from "react-bootstrap";
 import Logo from "../Images/DareMe_Logo.png";
 import "./css/LogIn.css";
+import { Link } from "react-router-dom";
 
 export class LogIn extends Component {
   render() {
@@ -26,7 +27,10 @@ export class LogIn extends Component {
         </Form>
 
         <p className="sign-up">
-          Sign up for free! <span className="signup-link">Sign Up</span>
+          Sign up for free!{" "}
+          <Link to="/signup" className="signup-link">
+            Sign Up
+          </Link>
         </p>
       </Container>
     );
