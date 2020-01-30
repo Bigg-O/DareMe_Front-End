@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route
 } from "react-router-dom";
 import NavBar from './Components/NavBar'
@@ -53,10 +53,10 @@ export class App extends Component {
   render() {
     const { logged_user, dares } = this.state
     return (
-      <Router>
+      <BrowserRouter>
         <Route exact path="/" component={LogIn} />
         <Route exact path="/signup" component={SignUp} />
-      </Router >
+      </BrowserRouter >
 
       // <Router>
       //   <NavBar user={logged_user} />

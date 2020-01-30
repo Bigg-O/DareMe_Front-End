@@ -5,20 +5,26 @@ import "./css/LogIn.css";
 import { Link } from "react-router-dom";
 
 export class LogIn extends Component {
+
+  handleSubmission = e => {
+    e.preventDefault()
+    console.log(e)
+  }
+
   render() {
     return (
       <Container className="login-container">
         <Image className="login-logo" src={Logo} fluid />
 
-        <Form className="loginForm">
+        <Form className="loginForm" onSubmit={this.handleSubmission}>
           <Form.Group controlId="formUsername">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="username" placeholder="Enter Username" />
+            <Form.Control required type="username" placeholder="Enter Username" />
           </Form.Group>
 
           <Form.Group controlId="formPassword">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="Enter Password" />
+            <Form.Control required type="password" placeholder="Enter Password" />
           </Form.Group>
 
           <Button className="log-in" variant="primary" type="submit">
