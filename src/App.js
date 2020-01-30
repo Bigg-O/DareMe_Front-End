@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import './App.css';
 import {
-  BrowserRouter as Router,
-  Route
+  BrowserRouter,
+  Route,
+  Switch
 } from "react-router-dom";
 import NavBar from './Components/NavBar'
 import Body from './Containers/Body'
 import NewDare from './Components/NewDare'
 import LogIn from './Components/LogIn'
+import SignUp from './Components/SignUp'
 
 export class App extends Component {
   constructor() {
@@ -52,21 +54,25 @@ export class App extends Component {
   render() {
     const { logged_user, dares } = this.state
     return (
-      <LogIn />
-      // <Router>
-      //   <NavBar user={logged_user} />
-      //   <br />
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
 
-      //   <Route exact path="/">
-      //     <Body dares={dares} onPay={this.handlePayment} />
-      //   </Route>
-      //   <Route exact path="/new_dare">
-      //     <NewDare
-      //       user={logged_user}
-      //       onSubmit={this.handleNewDare}
-      //     />
-      //   </Route>
-      // </Router>
+            <NavBar user={logged_user} />
+            <Body dares={dares} onPay={this.handlePayment} />
+          </Route>
+          <Route exact path="/new_dare">
+            <NavBar user={logged_user} />
+            <NewDare
+              user={logged_user}
+              onSubmit={this.handleNewDare}
+            />
+          </Route>
+
+          <Route exact path="/login" component={LogIn} />
+          <Route exact path="/signup" component={SignUp} />
+        </Switch>
+      </BrowserRouter >
     )
   }
 }

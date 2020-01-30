@@ -1,0 +1,22 @@
+.login-container.container {
+  padding: 20%;
+}
+
+.login-logo.img-fluid {
+  margin-bottom: 3%;
+}
+
+.log-in.btn.btn-primary {
+  margin-top: 1%;
+}
+
+.sign-up {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.signup-link {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
