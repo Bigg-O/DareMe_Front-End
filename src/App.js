@@ -59,7 +59,7 @@ export class App extends Component {
           <Route exact path="/">
 
             <NavBar user={logged_user} />
-            <Body dares={dares} onPay={this.handlePayment} />
+            {/* <Body dares={dares} onPay={this.handlePayment} /> */}
           </Route>
           <Route exact path="/new_dare">
             <NavBar user={logged_user} />
