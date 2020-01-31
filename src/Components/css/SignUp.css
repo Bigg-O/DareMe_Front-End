@@ -1,3 +1,20 @@
 .signup-container.container {
   padding: 20%;
 }
+
+.b2-login {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.signup-desc {
+  text-align: center;
+  margin-top: 1%;
+  margin-bottom: 3%;
+}
+
+.login-link {
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}

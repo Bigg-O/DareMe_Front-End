@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import NavBar from "../Components/NavBar";
 
-export class Authorization extends Component {
+export class Authentication extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: false
+      currentUser: true
     };
   }
 
@@ -17,7 +16,7 @@ export class Authorization extends Component {
       //GET request to backend using JWT key to log in
       // fetch(url, {
       //   headers: {
-      //     Authorization: `Bearer ${jwt}`
+      //     Authentication: `Bearer ${jwt}`
       //   }
       // })
       //   .then(result =>
@@ -34,9 +33,21 @@ export class Authorization extends Component {
   }
 
   render() {
-    if (!this.state.currentUser) return <h1>Loading...</h1>;
-    else return this.props.children;
+    if (this.state.currentUser)
+      return this.props.children;
+    else
+      return (
+        <div>
+          <h1>LOADING</h1>
+          <h1>LOADING</h1>
+          <h1>LOADING</h1>
+          <h1>LOADING</h1>
+          <h1>LOADING</h1>
+          <h1>LOADING</h1>
+          <h1>LOADING</h1>
+        </div>
+      );
   }
 }
 
-export default withRouter(Authorization);
+export default withRouter(Authentication);

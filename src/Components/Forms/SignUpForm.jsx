@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Col, Button, InputGroup } from "react-bootstrap";
-import "./css/SignUpForm.css";
+import "../css/SignUpForm.css";
 
 export class SignUpForm extends Component {
   render() {
