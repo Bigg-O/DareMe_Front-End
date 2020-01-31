@@ -10,6 +10,7 @@ import Body from './Containers/Body'
 import NewDare from './Components/NewDare'
 import LogIn from './Components/LogIn'
 import SignUp from './Components/SignUp'
+import Authorization from './Middlewares/Authorization'
 
 export class App extends Component {
   constructor() {
@@ -55,23 +56,19 @@ export class App extends Component {
     const { logged_user, dares } = this.state
     return (
       <BrowserRouter>
-        <Switch>
+        {/* <Authorization> */}
           <Route exact path="/">
-
-            <NavBar user={logged_user} />
-            {/* <Body dares={dares} onPay={this.handlePayment} /> */}
+            <Body dares={dares} onPay={this.handlePayment} />
           </Route>
           <Route exact path="/new_dare">
-            <NavBar user={logged_user} />
             <NewDare
               user={logged_user}
               onSubmit={this.handleNewDare}
             />
           </Route>
-
-          <Route exact path="/login" component={LogIn} />
-          <Route exact path="/signup" component={SignUp} />
-        </Switch>
+        {/* </Authorization> */}
+        <Route exact path="/login" component={LogIn} />
+        <Route exact path="/signup" component={SignUp} />
       </BrowserRouter >
     )
   }
