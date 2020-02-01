@@ -22,7 +22,7 @@ export class LogIn extends Component {
 
   render() {
     return (
-      <Container className="login-container">
+      <Container fluid className="login-container">
         <Image className="login-logo" src={Logo} fluid />
 
         <LogInForm onSubmit={this.handleSubmission} />

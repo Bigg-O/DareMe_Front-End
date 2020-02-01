@@ -14,7 +14,7 @@ export class SignUp extends Component {
 
   render() {
     return (
-      <Container className="signup-container">
+      <Container fluid className="signup-container">
         <Image className="login-logo" src={Logo} fluid />
 
         <h1 className="signup-desc">Create an Account!</h1>
