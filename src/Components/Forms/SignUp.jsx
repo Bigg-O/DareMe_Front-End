@@ -9,32 +9,25 @@ import axios from "axios";
 export class SignUp extends Component {
   handleSubmission = e => {
     e.preventDefault();
-    const {
-      formUsername,
-      formEmail,
-      formPassword,
-      formPassword2,
-      formAbout
-    } = e.target;
-
-    if (formPassword.value === formPassword2.value) {
+    if (e.target.formPassword.value === e.target.formPassword2.value) {
       axios
         .post("http://localhost:3000/users/signup", {
-          username: formUsername.value,
-          email: formEmail.value,
-          password: formPassword.value,
-          about: formAbout.value
+          username: e.target.formUsername.value,
+          email: e.target.formEmail.value,
+          password: e.target.formPassword.value,
+          about: e.target.formAbout.value
         })
         .then(response => {
           console.log(response);
-          // alert(response.response);
-          formUsername.value = "";
-          formEmail.value = "";
-          formPassword.value = "";
-          formPassword2.value = "";
-          formAbout.value = "";
+          alert(response.data.message);
+          e.target.formUsername.value = "";
+          e.target.formEmail.value = "";
+          e.target.formPassword.value = "";
+          e.target.formPassword2.value = "";
+          e.target.formAbout.value = "";
         })
         .catch(error => {
+          console.log(error);
           if (error.response.status === 500)
             alert(error.response.data.error.message);
           else if (error.response.status === 409)
