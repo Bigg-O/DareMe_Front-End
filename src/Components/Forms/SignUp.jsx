@@ -4,12 +4,45 @@ import Logo from "../../Images/DareMe_Logo.png";
 import { Container, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
+import axios from "axios";
 
 export class SignUp extends Component {
-  
   handleSubmission = e => {
     e.preventDefault();
-    console.log(e);
+    const {
+      formUsername,
+      formEmail,
+      formPassword,
+      formPassword2,
+      formAbout
+    } = e.target;
+
+    if (formPassword.value === formPassword2.value) {
+      axios
+        .post("http://localhost:3000/users/signup", {
+          username: formUsername.value,
+          email: formEmail.value,
+          password: formPassword.value,
+          about: formAbout.value
+        })
+        .then(response => {
+          console.log(response);
+          // alert(response.response);
+          formUsername.value = "";
+          formEmail.value = "";
+          formPassword.value = "";
+          formPassword2.value = "";
+          formAbout.value = "";
+        })
+        .catch(error => {
+          if (error.response.status === 500)
+            alert(error.response.data.error.message);
+          else if (error.response.status === 409)
+            alert(error.response.data.message);
+        });
+    } else {
+      alert("Password Match Failed");
+    }
   };
 
   render() {
