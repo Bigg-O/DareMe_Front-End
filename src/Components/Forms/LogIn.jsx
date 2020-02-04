@@ -4,20 +4,27 @@ import Logo from "../../Images/DareMe_Logo.png";
 import "../css/LogIn.css";
 import { Link } from "react-router-dom";
 import LogInForm from "./LogInForm";
+import axios from "axios";
 
 export class LogIn extends Component {
   handleSubmission = e => {
     e.preventDefault();
-    console.log(e);
 
     // Make Post request to backend and store JWT key to local storage
-    // fetch(url, {
-    //   username: e.target,
-    //   password: e.target
-    // }).then(result => {
-    //   localStorage.setItem("JWT", result.data);
-    //   this.props.history.push('AuthComp')
-    // });
+    axios
+      .post("http://localhost:3000/users/login", {
+        username: e.target.formUsername.value,
+        password: e.target.formPassword.value
+      })
+      .then(response => {
+        console.log(response);
+        localStorage.setItem("JWT", response.data.token);
+        this.props.history.push("/");
+      })
+      .catch(error => {
+        console.log(error);
+        if (error) alert(error.response.data.message);
+      });
   };
 
   render() {

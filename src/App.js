@@ -14,40 +14,13 @@ export class App extends Component {
   constructor() {
     super()
     this.state = {
-      currentUser: '',
+      currentUser: null,
       dares: []
     }
   }
 
-  componentDidMount() {
-    const currentUser = {
-      id: "d1h98hd3190j",
-      username: "Bigg-O",
-      wallet: 100,
-      profile_pic_url: "https://www.fakepersongenerator.com/Face/male/male1084242792541.jpg",
-      about: "Internetaholic. Total creator. Passionate coffee expert. Hipster-friendly travel buff."
-    }
-    const data = require('./temp_data.json')
-
-    this.setState({ currentUser })
-    this.setState({ dares: data.dares })
-  }
-
-  handlePayment = (dare_id, amount) => {
-    let dares = [...this.state.dares]
-    let dare = dares.find(dare => dare.id === dare_id)
-    let user = this.state.currentUser
-
-    if (dare.amount + amount <= dare.wanted_profit && amount <= user.wallet) {
-      user.wallet -= amount
-      dare.amount += amount
-      this.setState({ user })
-      this.setState({ dares })
-    }
-  }
-
-  handleNewDare = (e) => {
-    console.log(e)
+  setCurrentUser = user => {
+    console.log(user)
   }
 
   render() {
@@ -55,10 +28,10 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/login" component={LogIn} />
+          <Route path="/login" component={LogIn} onLogin={this.setCurrentUser}/>
           <Route path="/signup" component={SignUp} />
 
-          <Authentication>
+          <Authentication user={currentUser}>
             <NavBar user={currentUser} />
             <Route path="/">
               <Body dares={dares} onPay={this.handlePayment} />
@@ -67,7 +40,7 @@ export class App extends Component {
               <NewDare
                 user={currentUser}
                 onSubmit={this.handleNewDare}
-              />
+                />
             </Route>
           </Authentication>
         </Switch>
@@ -77,3 +50,36 @@ export class App extends Component {
 }
 
 export default App
+
+
+  // componentDidMount() {
+  //   const currentUser = {
+  //     id: "d1h98hd3190j",
+  //     username: "Bigg-O",
+  //     wallet: 100,
+  //     profile_pic_url: "https://www.fakepersongenerator.com/Face/male/male1084242792541.jpg",
+  //     about: "Internetaholic. Total creator. Passionate coffee expert. Hipster-friendly travel buff."
+  //   }
+  //   const data = require('./temp_data.json')
+  
+  //   this.setState({ currentUser })
+  //   this.setState({ dares: data.dares })
+  // }
+
+
+  // handlePayment = (dare_id, amount) => {
+  //   let dares = [...this.state.dares]
+  //   let dare = dares.find(dare => dare.id === dare_id)
+  //   let user = this.state.currentUser
+    
+  //   if (dare.amount + amount <= dare.wanted_profit && amount <= user.wallet) {
+  //     user.wallet -= amount
+  //     dare.amount += amount
+  //     this.setState({ user })
+  //     this.setState({ dares })
+  //   }
+  // }
+  
+  // handleNewDare = (e) => {
+  //   console.log(e)
+  // }
