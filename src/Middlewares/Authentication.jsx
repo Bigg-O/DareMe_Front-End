@@ -15,7 +15,6 @@ export class Authentication extends Component {
           }
         })
         .then(response => {
-          // console.log(response);
           this.props.onDataLoad(response.data.dares);
         })
         .catch(err => {

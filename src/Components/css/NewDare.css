@@ -1,0 +1,9 @@
+.newdare-container.container-fluid {
+  padding: 20%;
+}
+
+.newdare-title {
+  text-align: center;
+  font-size: 100px;
+  color: rgb(33, 65, 150);
+}
