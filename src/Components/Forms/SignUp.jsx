@@ -20,15 +20,10 @@ export class SignUp extends Component {
         .then(response => {
           console.log(response);
           alert(response.data.message);
-          e.target.formUsername.value = "";
-          e.target.formEmail.value = "";
-          e.target.formPassword.value = "";
-          e.target.formPassword2.value = "";
-          e.target.formAbout.value = "";
         })
         .catch(error => {
           console.log(error);
-          if (error) {
+          if (error.reponse) {
             if (error.response.status === 500)
               alert(error.response.data.error.message);
             else if (error.response.status === 409)
