@@ -6,7 +6,7 @@ import "./css/NavBar.css";
 
 export class NavBar extends Component {
   render() {
-    const { wallet, username } = this.props.user;
+    // const { wallet, username } = this.props.user;
     return (
       <Navbar
         collapseOnSelect
