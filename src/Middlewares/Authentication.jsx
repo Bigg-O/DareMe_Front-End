@@ -7,27 +7,26 @@ export class Authentication extends Component {
     const jwt = localStorage.getItem("JWT");
     if (!jwt) this.props.history.push("/login");
     else {
-      // GET request to backend using JWT key to log in
+      // GET request to backend using JWT key to retrieve data
       axios
         .get("http://localhost:3000/dares", {
           headers: {
-            authentication: `Bearer ${jwt}`
+            Authorization: `Bearer ${jwt}`
           }
         })
-        .then(result => {
-          console.log(result);
+        .then(response => {
+          // console.log(response);
+          this.props.onDataLoad(response.data.dares);
         })
-        // if failed loging in, going back to login page
-        // .catch(err => {
-        //   localStorage.removeItem("JWT");
-        //   this.props.histoy.push("/login");
-        // });
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 
   render() {
     const { currentUser, children } = this.props;
-    if (currentUser) return children;
+    if (currentUser !== null) return children;
     else
       return (
         <div>
