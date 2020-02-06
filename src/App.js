@@ -16,13 +16,15 @@ export class App extends Component {
   constructor() {
     super()
     this.state = {
-      currentUser: null,
       dares: []
     }
   }
 
-  setCurrentUser = currentUser => {
-    this.setState({ currentUser })
+  setCurrentUser = user => {
+    for (const prop in user)
+      localStorage.setItem(prop, user[prop]);
+    history.push("/")
+    this.render()
   }
 
   setDares = dares => {
@@ -30,25 +32,22 @@ export class App extends Component {
   }
 
   render() {
-    const { currentUser, dares } = this.state
+    const { dares } = this.state
     return (
       <BrowserRouter>
         <Switch>
           <Route path="/login">
-            <LogIn
-              history={history}
-              onLogin={this.setCurrentUser} />
+            <LogIn onLogin={this.setCurrentUser} />
           </Route>
           <Route path="/signup" component={SignUp} />
 
-          <Authentication user={currentUser} history={history} onDataLoad={this.setDares}>
-            <NavBar user={currentUser} />
+          <Authentication history={history} onDataLoad={this.setDares}>
+            <NavBar />
             <Route path="/">
               <Body dares={dares} onPay={this.handlePayment} />
             </Route>
             <Route path="/new_dare">
               <NewDare
-                user={currentUser}
                 onSubmit={this.handleNewDare}
               />
             </Route>
@@ -88,8 +87,4 @@ export default App
   //     this.setState({ user })
   //     this.setState({ dares })
   //   }
-  // }
-
-  // handleNewDare = (e) => {
-  //   console.log(e)
   // }

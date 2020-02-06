@@ -1,39 +1,54 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import "../css/NewDare.css";
+import NewDareForm from "./NewDareForm";
+import axios from "axios";
 
 export class NewDare extends Component {
+  handleSubmission = e => {
+    e.preventDefault();
+    const jwt = localStorage.getItem("JWT");
+    fetch("http://localhost:3000/dares", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("_id"),
+        open_title: e.target.formTitle.value,
+        open_description: e.target.formDescription.value,
+        open_pic_url: e.target.formPic.value,
+        wanted_profit: e.target.formPrice.value
+      })
+    })
+      .then(response => console.log(response))
+      .catch(error => console.log(error.response));
+    // axios
+    //   .post("http://localhost:3000/dares", {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${jwt}`
+    //     },
+    //     body: JSON.stringify({
+    //       user_id: localStorage.getItem("_id"),
+    //       open_title: e.target.formTitle.value,
+    //       open_description: e.target.formDescription.value,
+    //       open_pic_url: e.target.formPic.value,
+    //       wanted_profit: e.target.formPrice.value
+    //     })
+    //   })
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error.response));
+  };
+
   render() {
     return (
-      <Form className="form">
-        <Form.Row>
-          <Form.Group controlId="title">
-            <Form.Label>Title</Form.Label>
-            <Form.Control required />
-          </Form.Group>
-          <Form.Group controlId="url">
-            <Form.Label>Picture URL</Form.Label>
-            <Form.Control required />
-          </Form.Group>
-          <Form.Group controlId="price">
-            <Form.Label>Dare Price</Form.Label>
-            <Form.Control required />
-          </Form.Group>
-        </Form.Row>
-        <Form.Group controlId="description">
-          <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" required />
-        </Form.Group>
-        <Link to="/">
-          <Button
-            variant="primary"
-            type="submit"
-            onClick={() => this.props.onSubmit()}
-          >
-            Submit
-          </Button>
-        </Link>
-      </Form>
+      <Container fluid className="newdare-container">
+        <h1 className="newdare-title">New Dare!</h1>
+
+        <NewDareForm onSubmit={this.handleSubmission} />
+      </Container>
     );
   }
 }
