@@ -1,54 +1,53 @@
 import React, { Component } from "react";
-import { Form, Button, Container, Col, InputGroup } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import "../css/NewDare.css";
+import NewDareForm from "./NewDareForm";
+import axios from "axios";
 
 export class NewDare extends Component {
+  handleSubmission = e => {
+    e.preventDefault();
+    const jwt = localStorage.getItem("JWT");
+    fetch("http://localhost:3000/dares", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`
+      },
+      body: JSON.stringify({
+        user_id: localStorage.getItem("_id"),
+        open_title: e.target.formTitle.value,
+        open_description: e.target.formDescription.value,
+        open_pic_url: e.target.formPic.value,
+        wanted_profit: e.target.formPrice.value
+      })
+    })
+      .then(response => console.log(response))
+      .catch(error => console.log(error.response));
+    // axios
+    //   .post("http://localhost:3000/dares", {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: `Bearer ${jwt}`
+    //     },
+    //     body: JSON.stringify({
+    //       user_id: localStorage.getItem("_id"),
+    //       open_title: e.target.formTitle.value,
+    //       open_description: e.target.formDescription.value,
+    //       open_pic_url: e.target.formPic.value,
+    //       wanted_profit: e.target.formPrice.value
+    //     })
+    //   })
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error.response));
+  };
+
   render() {
     return (
       <Container fluid className="newdare-container">
         <h1 className="newdare-title">New Dare!</h1>
 
-        <Form className="form">
-          <Form.Row>
-            <Form.Group as={Col} md="7" controlId="formTitle">
-              <Form.Label>Title</Form.Label>
-              <Form.Control required placeholder="Title" />
-            </Form.Group>
-
-            <Form.Group as={Col} md="5" controlId="formPrice">
-              <Form.Label>Dare Price</Form.Label>
-              <InputGroup>
-                <InputGroup.Prepend>
-                  <InputGroup.Text id="inputGroupPrepend">$</InputGroup.Text>
-                </InputGroup.Prepend>
-                <Form.Control required placeholder="dollars" />
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-
-          <Form.Row>
-            <Form.Group as={Col} controlId="formPic">
-              <Form.Label>Picture URL</Form.Label>
-              <Form.Control required placeholder="http://www......" />
-            </Form.Group>
-          </Form.Row>
-
-          <Form.Row>
-            <Form.Group as={Col} controlId="formDescription">
-              <Form.Label>Description</Form.Label>
-              <Form.Control
-                required
-                as="textarea"
-                rows="3"
-                placeholder="What's the dare??"
-              />
-            </Form.Group>
-          </Form.Row>
-
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
+        <NewDareForm onSubmit={this.handleSubmission} />
       </Container>
     );
   }
