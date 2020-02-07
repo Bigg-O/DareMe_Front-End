@@ -5,7 +5,6 @@ import './css/Body.css'
 
 export class Body extends Component {
   render() {
-    console.log(this.props)
     const { dares } = this.props;
     return (
       <CardColumns>
