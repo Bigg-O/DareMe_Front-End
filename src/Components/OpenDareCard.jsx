@@ -8,13 +8,13 @@ export class DareCard extends Component {
       username,
       open_title,
       open_description,
-      open_pic_url
+      open_pic
     } = this.props.dare;
     return (
       <Card>
         <Card.Header>{username}</Card.Header>
 
-        <Card.Img variant="top" src={open_pic_url} />
+        <Card.Img variant="top" src={open_pic} />
 
         <Card.Body>
           <Card.Title>{open_title}</Card.Title>

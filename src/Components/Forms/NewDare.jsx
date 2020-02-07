@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import "../css/NewDare.css";
 import NewDareForm from "./NewDareForm";
-import axios from "axios";
+// import axios from "axios";
 
 export class NewDare extends Component {
   handleSubmission = e => {
