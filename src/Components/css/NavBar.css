@@ -1,7 +1,19 @@
-.navbar.navbar-expand-md.navbar-dark.bg-primary.fixed-top {
-  background: rgba(105, 105, 105, 1) !important;
+.navbar.navbar-expand-md.navbar-dark.fixed-top {
+  background: rgba(105, 105, 105, 0.8) !important;
 }
 
 .home-logo.navbar-brand.active {
   width: 8%;
+  margin: 0;
+  padding: 0;
+}
+
+.username {
+  color: rgb(37, 37, 189) !important;
+  text-decoration: underline;
+}
+
+.navbar-text {
+  font-weight: 600;
+  color: white !important;
 }

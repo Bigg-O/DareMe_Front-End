@@ -40,10 +40,10 @@ export class App extends Component {
 
           <Authentication onDataLoad={this.setDares}>
             <NavBar />
-            <Route exac path="/">
+            <Route exact path="/">
               <Body dares={dares} />
             </Route>
-            <Route exac path="/new_dare">
+            <Route exact path="/new_dare">
               <NewDare
                 onSubmit={this.handleNewDare}
               />
