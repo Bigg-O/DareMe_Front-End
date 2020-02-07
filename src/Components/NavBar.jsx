@@ -1,35 +1,38 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { Navbar, Button, Nav, Image } from "react-bootstrap";
+import { NavLink, Link } from "react-router-dom";
+import { Navbar, Button, Badge, Nav, Image } from "react-bootstrap";
 import Logo from "../Images/DareMe_SM_Logo.png";
 import "./css/NavBar.css";
 
 export class NavBar extends Component {
   render() {
-    console.log(this.props)
-    // const { wallet, username } = this.props.user;
+    const username = localStorage.getItem("username");
+    const wallet = localStorage.getItem("wallet");
     return (
-      <Navbar
-        collapseOnSelect
-        expand="md"
-        bg="primary"
-        variant="dark"
-        fixed="top"
-      >
+      <Navbar collapseOnSelect expand="md" variant="dark" fixed="top">
         <Navbar.Brand className="home-logo" as={NavLink} to="/">
-          <Image fluid src={Logo} />
+          <Image src={Logo} fluid />
         </Navbar.Brand>
+
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <div className="mr-auto" />
-          <Nav>
-            {/* <Button variant="primary">
-              Money: <Badge variant="light"> ${wallet}</Badge>
-            </Button>
-            <Navbar.Text>Signed in as: {username}</Navbar.Text> */}
-            <Button className="add-dare" as={NavLink} to="/new_dare">
-              Add Dare!
-            </Button>
+          <Nav className="nav">
+            <Nav.Link as={Link} to="">
+              <Navbar.Text className="navbar-text">
+                user: <span className="username">{username}</span>
+              </Navbar.Text>
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="">
+              <Navbar.Text className="navbar-text">
+                money: <Badge variant="dark"> ${wallet}</Badge>
+              </Navbar.Text>
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/new_dare">
+              <Button className="add-dare">Add Dare!</Button>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
