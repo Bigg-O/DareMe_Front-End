@@ -43,10 +43,10 @@ export class App extends Component {
 
           <Authentication history={history} onDataLoad={this.setDares}>
             <NavBar />
-            <Route path="/">
-              <Body dares={dares} onPay={this.handlePayment} />
+            <Route exac path="/">
+              <Body dares={dares} />
             </Route>
-            <Route path="/new_dare">
+            <Route exac path="/new_dare">
               <NewDare
                 onSubmit={this.handleNewDare}
               />
