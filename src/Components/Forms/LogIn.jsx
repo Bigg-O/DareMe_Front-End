@@ -5,6 +5,7 @@ import "../css/LogIn.css";
 import { Link, Redirect } from "react-router-dom";
 import LogInForm from "./LogInForm";
 import axios from "axios";
+import history from "../../history";
 
 export class LogIn extends Component {
   handleSubmission = e => {
@@ -20,6 +21,7 @@ export class LogIn extends Component {
         console.log("successful Login: ", response);
         localStorage.setItem("JWT", response.data.token);
         this.props.onLogin(response.data.user);
+        history.push("/");
       })
       .catch(error => {
         console.log("Error in Login: ", error);

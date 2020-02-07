@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import { Navbar, Button, Badge, Nav, Image } from "react-bootstrap";
+import { Navbar, Button, Nav, Image } from "react-bootstrap";
 import Logo from "../Images/DareMe_SM_Logo.png";
 import "./css/NavBar.css";
 
 export class NavBar extends Component {
   render() {
+    console.log(this.props)
     // const { wallet, username } = this.props.user;
     return (
       <Navbar

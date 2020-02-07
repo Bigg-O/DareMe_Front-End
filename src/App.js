@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './App.css';
 import {
-  BrowserRouter, Route, Switch
+  Router, Route, Switch
 } from "react-router-dom";
 import NavBar from './Components/NavBar'
 import Body from './Containers/Body'
@@ -9,8 +9,7 @@ import NewDare from './Components/Forms/NewDare'
 import LogIn from './Components/Forms/LogIn'
 import SignUp from './Components/Forms/SignUp'
 import Authentication from './Middlewares/Authentication'
-import { createBrowserHistory } from 'history'
-const history = createBrowserHistory();
+import history from './history'
 
 export class App extends Component {
   constructor() {
@@ -23,8 +22,6 @@ export class App extends Component {
   setCurrentUser = user => {
     for (const prop in user)
       localStorage.setItem(prop, user[prop]);
-    history.push("/")
-    this.render()
   }
 
   setDares = dares => {
@@ -34,14 +31,14 @@ export class App extends Component {
   render() {
     const { dares } = this.state
     return (
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           <Route path="/login">
             <LogIn onLogin={this.setCurrentUser} />
           </Route>
           <Route path="/signup" component={SignUp} />
 
-          <Authentication history={history} onDataLoad={this.setDares}>
+          <Authentication onDataLoad={this.setDares}>
             <NavBar />
             <Route exac path="/">
               <Body dares={dares} />
@@ -53,7 +50,7 @@ export class App extends Component {
             </Route>
           </Authentication>
         </Switch>
-      </BrowserRouter >
+      </Router >
     )
   }
 }

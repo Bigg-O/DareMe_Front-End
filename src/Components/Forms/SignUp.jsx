@@ -5,6 +5,7 @@ import { Container, Image } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 import axios from "axios";
+import history from "../../history";
 
 export class SignUp extends Component {
   handleSubmission = e => {
@@ -20,6 +21,7 @@ export class SignUp extends Component {
         .then(response => {
           console.log(response);
           alert(response.data.message);
+          history.push("/login");
         })
         .catch(error => {
           console.log(error);
