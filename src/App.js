@@ -44,9 +44,7 @@ export class App extends Component {
               <Body dares={dares} />
             </Route>
             <Route exact path="/new_dare">
-              <NewDare
-                onSubmit={this.handleNewDare}
-              />
+              <NewDare onSubmit={this.handleNewDare} />
             </Route>
           </Authentication>
         </Switch>
@@ -56,22 +54,6 @@ export class App extends Component {
 }
 
 export default App
-
-
-  // componentDidMount() {
-  //   const currentUser = {
-  //     id: "d1h98hd3190j",
-  //     username: "Bigg-O",
-  //     wallet: 100,
-  //     profile_pic_url: "https://www.fakepersongenerator.com/Face/male/male1084242792541.jpg",
-  //     about: "Internetaholic. Total creator. Passionate coffee expert. Hipster-friendly travel buff."
-  //   }
-  //   const data = require('./temp_data.json')
-
-  //   this.setState({ currentUser })
-  //   this.setState({ dares: data.dares })
-  // }
-
 
   // handlePayment = (dare_id, amount) => {
   //   let dares = [...this.state.dares]
