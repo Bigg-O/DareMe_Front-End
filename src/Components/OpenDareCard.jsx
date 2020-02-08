@@ -36,7 +36,7 @@ export class DareCard extends Component {
     });
 
     if (wallet < selected_amount) {
-      alert("Insufficient money");
+      alert("Insufficient money, you're broke");
     } else if (wanted_profit > total_amount + selected_amount) {
       // PATCH request for DARE UPDATE
       fetch(`http://localhost:3000/dares/${dare_id}`, {
@@ -53,6 +53,7 @@ export class DareCard extends Component {
         .then(promise => promise.json())
         .then(resp => {
           console.log(resp);
+          // update and rerender dare info
           this.render();
         })
         .catch(err => console.log(err));
