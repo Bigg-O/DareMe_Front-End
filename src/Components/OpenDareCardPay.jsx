@@ -10,8 +10,8 @@ import {
 } from "react-bootstrap";
 
 export class OpenDareCardPay extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       selected_amount: 0
     };
@@ -22,24 +22,27 @@ export class OpenDareCardPay extends Component {
   };
 
   render() {
-    const { id, amount, username, wanted_profit } = this.props.dare;
+    const { selected_amount } = this.state;
+    const { onPay } = this.props;
+    const { username } = this.props.user;
+    const { _id, total_amount, wanted_profit } = this.props.dare;
 
-    if (wanted_profit === amount) {
+    if (wanted_profit <= total_amount) {
       return (
-        <div>
+        <>
           <ProgressBar
             striped
             variant="success"
             now={100}
-            label={`$${amount}`}
+            label={`$${total_amount}`}
           />
           <br />
           <Alert variant="info">DARE IS IN PROGRESS</Alert>
-        </div>
+        </>
       );
     } else
       return (
-        <div>
+        <>
           <ButtonToolbar aria-label="Toolbar with button groups">
             <ButtonGroup>
               <ButtonGroup className="mr-1">
@@ -57,7 +60,7 @@ export class OpenDareCardPay extends Component {
               </ButtonGroup>
               <Button
                 variant="outline-danger"
-                onClick={() => this.props.onPay(id, this.state.selected_amount)}
+                onClick={() => onPay(_id, selected_amount)}
               >
                 Dare
               </Button>
@@ -67,12 +70,12 @@ export class OpenDareCardPay extends Component {
           <ProgressBar
             striped
             variant="danger"
-            now={(amount / wanted_profit) * 100}
-            label={`$${amount}`}
+            now={(total_amount / wanted_profit) * 100}
+            label={`$${total_amount}`}
           />
           <br />
-          {`${username} dares for $${wanted_profit}`}
-        </div>
+          {`@${username} dares for $${wanted_profit}`}
+        </>
       );
   }
 }
