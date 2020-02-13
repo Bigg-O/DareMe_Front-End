@@ -15,9 +15,7 @@ import axios from "axios";
 export class App extends Component {
   constructor() {
     super()
-    this.state = {
-      dares: []
-    }
+    this.state = { dares: [] }
   }
 
   hanleDareDataLoad = () => {
@@ -101,16 +99,3 @@ export class App extends Component {
 }
 
 export default App
-
-  // handlePayment = (dare_id, amount) => {
-  //   let dares = [...this.state.dares]
-  //   let dare = dares.find(dare => dare.id === dare_id)
-  //   let user = this.state.currentUser
-
-  //   if (dare.amount + amount <= dare.wanted_profit && amount <= user.wallet) {
-  //     user.wallet -= amount
-  //     dare.amount += amount
-  //     this.setState({ user })
-  //     this.setState({ dares })
-  //   }
-  // }
