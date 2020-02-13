@@ -10,12 +10,33 @@ import LogIn from './Components/Forms/LogIn'
 import SignUp from './Components/Forms/SignUp'
 import Authentication from './Middlewares/Authentication'
 import history from './history'
+import axios from "axios";
 
 export class App extends Component {
   constructor() {
     super()
     this.state = {
       dares: []
+    }
+  }
+
+  hanleDareDataLoad = () => {
+    const jwt = localStorage.getItem("JWT");
+    if (!jwt) this.props.history.push("/login");
+    else {
+      // GET request to backend using JWT key to retrieve data
+      axios
+        .get("http://localhost:3000/dares", {
+          headers: {
+            Authorization: `Bearer ${jwt}`
+          }
+        })
+        .then(response => {
+          this.setState({ dares: response.data.dares })
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 
@@ -38,13 +59,13 @@ export class App extends Component {
           </Route>
           <Route path="/signup" component={SignUp} />
 
-          <Authentication onDataLoad={this.setDares}>
+          <Authentication onDareDataLoad={this.hanleDareDataLoad}>
             <NavBar />
             <Route exact path="/">
-              <Body dares={dares} />
+              <Body dares={dares} onDareDataLoad={this.hanleDareDataLoad}/>
             </Route>
             <Route exact path="/new_dare">
-              <NewDare onSubmit={this.handleNewDare} />
+              <NewDare onSubmit={this.handleNewDare} onDareDataLoad={this.hanleDareDataLoad}/>
             </Route>
           </Authentication>
         </Switch>
