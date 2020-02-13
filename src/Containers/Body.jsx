@@ -13,6 +13,7 @@ export class Body extends Component {
             key={dare._id}
             dare={dare}
             onDareDataLoad={this.props.onDareDataLoad}
+            onUserDataLoad={this.props.onUserDataLoad}
           />
         ))}
       </CardColumns>

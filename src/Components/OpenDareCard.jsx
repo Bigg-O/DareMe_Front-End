@@ -16,9 +16,7 @@ export class DareCard extends Component {
     const { user_id } = this.props.dare;
     axios
       .get(`http://localhost:3000/users/${user_id}`)
-      .then(resp => {
-        this.setState({ user: resp.data });
-      })
+      .then(resp => this.setState({ user: resp.data }))
       .catch(err => console.log(err));
   }
 
@@ -53,18 +51,33 @@ export class DareCard extends Component {
         .then(promise => promise.json())
         .then(resp => {
           console.log(resp);
-          this.props.onDareDataLoad()
+          this.props.onDareDataLoad();
         })
         .catch(err => console.log(err));
 
       // PATCH request for USER WALLET UPDATE
+      fetch(`http://localhost:3000/users/${currentUserID}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwt}`
+        },
+        body: JSON.stringify({
+          wallet: wallet - selected_amount
+        })
+      })
+        .then(promise => promise.json())
+        .then(resp => {
+          this.props.onUserDataLoad()
+          console.log(resp);
+        })
+        .catch(err => console.log(err));
     } else {
       alert("Don't over pay!");
     }
   };
 
   render() {
-    console.log(this.props)
     const { username } = this.state.user;
     const {
       open_title,
