@@ -6,6 +6,7 @@ import "./css/Body.css";
 export class Body extends Component {
   render() {
     const { dares } = this.props;
+    console.log(dares)
     return (
       <CardColumns>
         {dares.map(dare => (
