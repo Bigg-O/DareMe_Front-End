@@ -24,7 +24,7 @@ export class NavBar extends Component {
         <Navbar.Collapse id="responsive-navbar-nav">
           <div className="mr-auto" />
           <Nav className="nav">
-            <Nav.Link as={Link} to="">
+            <Nav.Link as={Link} to="/user_info">
               <Navbar.Text className="navbar-text">
                 user: <span className="username">{username}</span>
               </Navbar.Text>
