@@ -37,7 +37,7 @@ export class DareCard extends Component {
 
     if (wallet < selected_amount) {
       alert("Insufficient money, you're broke");
-    } else if (wanted_profit > total_amount + selected_amount) {
+    } else if (wanted_profit >= total_amount + selected_amount) {
       // PATCH request for DARE UPDATE
       fetch(`http://localhost:3000/dares/${dare_id}`, {
         method: "PATCH",
@@ -53,8 +53,7 @@ export class DareCard extends Component {
         .then(promise => promise.json())
         .then(resp => {
           console.log(resp);
-          // update and rerender dare info
-          this.render();
+          this.props.onDareDataLoad()
         })
         .catch(err => console.log(err));
 
@@ -65,7 +64,7 @@ export class DareCard extends Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log(this.props)
     const { username } = this.state.user;
     const {
       open_title,

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container } from "react-bootstrap";
 import "../css/NewDare.css";
 import NewDareForm from "./NewDareForm";
+import history from "../../history";
 // import axios from "axios";
 
 export class NewDare extends Component {
@@ -22,7 +23,11 @@ export class NewDare extends Component {
         wanted_profit: e.target.formPrice.value
       })
     })
-      .then(response => console.log(response))
+      .then(response => {
+        console.log(response)
+        history.push("/");
+        this.props.onDareDataLoad()
+      })
       .catch(error => console.log(error.response));
     // axios
     //   .post("http://localhost:3000/dares", {
