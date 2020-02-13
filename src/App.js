@@ -10,6 +10,7 @@ import LogIn from './Components/Forms/LogIn'
 import SignUp from './Components/Forms/SignUp'
 import Authentication from './Middlewares/Authentication'
 import history from './history'
+import UserInfo from './Components/UserInfo'
 import axios from "axios";
 
 export class App extends Component {
@@ -91,6 +92,7 @@ export class App extends Component {
             <Route exact path="/new_dare">
               <NewDare onSubmit={this.handleNewDare} onDareDataLoad={this.hanleDareDataLoad} />
             </Route>
+            <Route exact path="/user_info" component={UserInfo} />
           </Authentication>
         </Switch>
       </Router >
