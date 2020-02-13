@@ -5,6 +5,12 @@ import Logo from "../Images/DareMe_SM_Logo.png";
 import "./css/NavBar.css";
 
 export class NavBar extends Component {
+  handleLogout = () => {
+    const username = localStorage.getItem("username");
+    alert(`Logging out ${username}`);
+    localStorage.clear();
+  };
+
   render() {
     const username = localStorage.getItem("username");
     const wallet = localStorage.getItem("wallet");
@@ -22,6 +28,10 @@ export class NavBar extends Component {
               <Navbar.Text className="navbar-text">
                 user: <span className="username">{username}</span>
               </Navbar.Text>
+            </Nav.Link>
+
+            <Nav.Link as={Link} to="/login" onClick={this.handleLogout}>
+              <Navbar.Text className="navbar-text">logout</Navbar.Text>
             </Nav.Link>
 
             <Nav.Link as={Link} to="">

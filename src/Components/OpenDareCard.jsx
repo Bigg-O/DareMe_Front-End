@@ -64,7 +64,6 @@ export class DareCard extends Component {
   };
 
   render() {
-    console.log(this.props)
     const { username } = this.state.user;
     const {
       open_title,

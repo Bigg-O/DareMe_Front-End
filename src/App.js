@@ -44,7 +44,6 @@ export class App extends Component {
     for (const prop in user)
       localStorage.setItem(prop, user[prop]);
   }
-
   setDares = dares => {
     this.setState({ dares })
   }
