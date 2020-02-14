@@ -3,13 +3,14 @@ import { Container } from "react-bootstrap";
 import "../css/NewDare.css";
 import NewDareForm from "./NewDareForm";
 import history from "../../history";
+const HEROKU_URL = "https://dareme-server.herokuapp.com/"
 // import axios from "axios";
 
 export class NewDare extends Component {
   handleSubmission = e => {
     e.preventDefault();
     const jwt = localStorage.getItem("JWT");
-    fetch("http://localhost:3000/dares", {
+    fetch(HEROKU_URL + "/dares", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +31,7 @@ export class NewDare extends Component {
       })
       .catch(error => console.log(error.response));
     // axios
-    //   .post("http://localhost:3000/dares", {
+    //   .post(HEROKU_URL + "/dares", {
     //     headers: {
     //       "Content-Type": "application/json",
     //       Authorization: `Bearer ${jwt}`

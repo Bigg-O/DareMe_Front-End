@@ -3,6 +3,7 @@ import OpenDareCardPay from "./OpenDareCardPay";
 import Card from "react-bootstrap/Card";
 import "./css/OpenDareCard.css";
 import axios from "axios";
+const HEROKU_URL = "https://dareme-server.herokuapp.com";
 
 export class DareCard extends Component {
   constructor(props) {
@@ -15,34 +16,34 @@ export class DareCard extends Component {
   componentDidMount() {
     const { user_id } = this.props.dare;
     axios
-      .get(`http://localhost:3000/users/${user_id}`)
+      .get(HEROKU_URL + `/users/${user_id}`)
       .then(resp => this.setState({ user: resp.data }))
       .catch(err => console.log(err));
   }
 
   handlePayment = (_id, selected_amount) => {
+    const { wanted_profit, total_amount, bidders } = this.props.dare;
     const wallet = localStorage.getItem("wallet");
     const jwt = localStorage.getItem("JWT");
     const dare_id = _id;
     const currentUserID = localStorage.getItem("_id");
 
-    const { wanted_profit, total_amount, bidders } = this.props.dare;
-    bidders.push({
-      bidder_id: currentUserID,
-      amount: selected_amount,
-      date: Date.now()
-    });
-
     if (wallet < selected_amount) {
       alert("Insufficient money, you're broke");
     } else if (wanted_profit >= total_amount + selected_amount) {
+      bidders.push({
+        bidder_id: currentUserID,
+        amount: selected_amount,
+        date: Date.now()
+      });
+      const headers = {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`
+      };
       // PATCH request for DARE UPDATE
-      fetch(`http://localhost:3000/dares/${dare_id}`, {
+      fetch(HEROKU_URL + `/dares/${dare_id}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`
-        },
+        headers: headers,
         body: JSON.stringify({
           total_amount: total_amount + selected_amount,
           bidders: bidders
@@ -56,19 +57,16 @@ export class DareCard extends Component {
         .catch(err => console.log(err));
 
       // PATCH request for USER WALLET UPDATE
-      fetch(`http://localhost:3000/users/${currentUserID}`, {
+      fetch(HEROKU_URL + `/users/${currentUserID}`, {
         method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${jwt}`
-        },
+        headers: headers,
         body: JSON.stringify({
           wallet: wallet - selected_amount
         })
       })
         .then(promise => promise.json())
         .then(resp => {
-          this.props.onUserDataLoad()
+          this.props.onUserDataLoad();
           console.log(resp);
         })
         .catch(err => console.log(err));
