@@ -13,9 +13,9 @@ export class LogIn extends Component {
       return (
         <Container fluid className="login-container">
           <Alert variant="secondary">
-            Username: Test-Man
+            Username: test-man
             <br />
-            PW: Test1234
+            PW: 1234
           </Alert>
 
           <Image className="login-logo" src={Logo} fluid />
