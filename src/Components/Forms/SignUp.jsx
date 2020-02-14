@@ -6,13 +6,14 @@ import { Link, Redirect } from "react-router-dom";
 import SignUpForm from "./SignUpForm";
 import axios from "axios";
 import history from "../../history";
+const HEROKU_URL = "https://dareme-server.herokuapp.com/";
 
 export class SignUp extends Component {
   handleSubmission = e => {
     e.preventDefault();
     if (e.target.formPassword.value === e.target.formPassword2.value) {
       axios
-        .post("http://localhost:3000/users/signup", {
+        .post(HEROKU_URL + "/users/signup", {
           username: e.target.formUsername.value,
           email: e.target.formEmail.value,
           password: e.target.formPassword.value,

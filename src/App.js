@@ -12,6 +12,7 @@ import Authentication from './Middlewares/Authentication'
 import history from './history'
 import UserInfo from './Components/UserInfo'
 import axios from "axios";
+const HEROKU_URL = "https://dareme-server.herokuapp.com"
 
 export class App extends Component {
   constructor() {
@@ -25,7 +26,7 @@ export class App extends Component {
     else {
       // GET request to backend using JWT key to retrieve data
       axios
-        .get("http://localhost:3000/dares", {
+        .get(HEROKU_URL + "/dares", {
           headers: {
             Authorization: `Bearer ${jwt}`
           }
@@ -45,7 +46,7 @@ export class App extends Component {
     if (!localStorage.getItem("username")) {
       e.preventDefault()
       axios
-        .post("http://localhost:3000/users/login", {
+        .post(HEROKU_URL + "/users/login", {
           username: e.target.formUsername.value,
           password: e.target.formPassword.value
         })
@@ -60,7 +61,7 @@ export class App extends Component {
           if (error.response) alert(error.response.data.message);
         });
     } else {
-      axios.get(`http://localhost:3000/users/${localStorage.getItem("_id")}`)
+      axios.get(HEROKU_URL + `/users/${localStorage.getItem("_id")}`)
         .then(resp => localStorage.setItem("wallet", resp.data.wallet))
         .catch(err => console.log(err))
     }
