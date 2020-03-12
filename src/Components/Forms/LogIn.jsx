@@ -20,7 +20,7 @@ export class LogIn extends Component {
 
           <Image className="login-logo" src={Logo} fluid />
 
-          <LogInForm onSubmit={this.props.onUserDataLoad} />
+          <LogInForm onSubmit={this.props.onUserDataLoad}/>
 
           <p className="sign-up">
             Sign up for free!{" "}
