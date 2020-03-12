@@ -17,7 +17,10 @@ const HEROKU_URL = "https://dareme-server.herokuapp.com"
 export class App extends Component {
   constructor() {
     super()
-    this.state = { dares: [] }
+    this.state = {
+      dares: [],
+      isLoading: false
+    }
   }
 
   hanleDareDataLoad = () => {
@@ -45,12 +48,14 @@ export class App extends Component {
     // Make Post request to backend and store JWT key to local storage
     if (!localStorage.getItem("username")) {
       e.preventDefault()
+      this.setState({ isLoading: true })
       axios
         .post(HEROKU_URL + "/users/login", {
           username: e.target.formUsername.value,
           password: e.target.formPassword.value
         })
         .then(response => {
+          this.setState({ isLoading: false })
           console.log("successful Login: ", response);
           localStorage.setItem("JWT", response.data.token);
           this.setCurrentUser(response.data.user);
@@ -76,28 +81,38 @@ export class App extends Component {
   }
 
   render() {
-    const { dares } = this.state
-    return (
-      <Router history={history}>
-        <Switch>
-          <Route path="/login">
-            <LogIn onUserDataLoad={this.handleUserDataLoad} />
-          </Route>
-          <Route path="/signup" component={SignUp} />
+    const { dares, isLoading } = this.state
+    if (isLoading) {
+      return (
+        <>
+          <h1>LOADING.....</h1>
+          <h1>LOADING.....</h1>
+          <h1>LOADING.....</h1>
+        </>
+      )
+    } else {
+      return (
+        <Router history={history}>
+          <Switch>
+            <Route path="/login">
+              <LogIn onUserDataLoad={this.handleUserDataLoad} />
+            </Route>
+            <Route path="/signup" component={SignUp} />
 
-          <Authentication onDareDataLoad={this.hanleDareDataLoad}>
-            <NavBar />
-            <Route exact path="/">
-              <Body dares={dares} onDareDataLoad={this.hanleDareDataLoad} onUserDataLoad={this.handleUserDataLoad} />
-            </Route>
-            <Route exact path="/new_dare">
-              <NewDare onSubmit={this.handleNewDare} onDareDataLoad={this.hanleDareDataLoad} />
-            </Route>
-            <Route exact path="/user_info" component={UserInfo} />
-          </Authentication>
-        </Switch>
-      </Router >
-    )
+            <Authentication onDareDataLoad={this.hanleDareDataLoad}>
+              <NavBar />
+              <Route exact path="/">
+                <Body dares={dares} onDareDataLoad={this.hanleDareDataLoad} onUserDataLoad={this.handleUserDataLoad} />
+              </Route>
+              <Route exact path="/new_dare">
+                <NewDare onSubmit={this.handleNewDare} onDareDataLoad={this.hanleDareDataLoad} />
+              </Route>
+              <Route exact path="/user_info" component={UserInfo} />
+            </Authentication>
+          </Switch>
+        </Router >
+      )
+    }
   }
 }
 
