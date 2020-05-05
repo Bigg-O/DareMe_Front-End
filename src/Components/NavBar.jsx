@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { Navbar, Button, Badge, Nav, Image } from "react-bootstrap";
+import Navbar from "react-bootstrap/Navbar"
+import Button from "react-bootstrap/Button"
+import Badge from "react-bootstrap/Badge"
+import Nav from "react-bootstrap/Nav"
+import Image from "react-bootstrap/Image"
 import Logo from "../Images/DareMe_SM_Logo.png";
 import "./css/NavBar.css";
 
